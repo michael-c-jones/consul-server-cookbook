@@ -1,0 +1,18 @@
+# Copyright 2018 Euclid Analytics
+
+[Unit]
+Description=oauth2 proxy daemon
+After=network.target
+
+[Service]
+<% @env.map.each do |key, val| -%>
+Environment=<%= %Q{"#{key}=#{val}"} %>
+<% end-%>
+User=<%= @user %>
+Group=<%= @group %>
+ExecStart=<%= @binary %> -config=<%= @config %> >> /var/log/oauth.log
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,2 @@
+-A FWR -p tcp --dport <%= node['consul-server']['nginx-basicauth-port'] -%> -j ACCEPT
+-A FWR -p tcp --dport <%= node['consul-server']['oauth']['listen-port'] -%> -j ACCEPT

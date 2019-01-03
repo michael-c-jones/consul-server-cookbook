@@ -1,0 +1,15 @@
+{
+  "name": "consul-server",
+  "version": "0.0.6",
+  "maintainer": "devops",
+  "description": "Installs/Configures consul server",
+  "long_description": "Installs/Configures consul server",
+  "dependencies": {
+    "ssl_certificate": ">= 0.0.0",
+    "dnsmasq": ">= 0.0.0",
+    "cron": ">= 0.0.0",
+    "consul": ">= 0.0.0",
+    "iptables": ">= 0.0.0",
+    "chef_nginx": ">= 0.0.0"
+  }
+}

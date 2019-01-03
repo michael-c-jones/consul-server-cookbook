@@ -1,0 +1,29 @@
+#
+#  This file is managed by chef, changes will be overwritten
+#
+
+#upstream webapp {
+# server localhost:<%= node['consul-server']['ui-port'] %>;
+#}
+
+server {
+<% node['consul-server']['nginx-ports'].each do |portnum| %>
+  listen <%= portnum %>;
+  listen [::]:<%= portnum %>;
+<% end -%>
+
+  server_name  localhost;
+
+        # Load configuration files for the default server block.
+  include /etc/nginx/default.d/*.conf;
+
+  if ($http_x_forwarded_proto != 'https') {
+    return 301 https://$host$request_uri;
+  }
+
+  location / {
+    proxy_pass http://127.0.0.1:<%= node['consul-server']['ui-port'] %>; # must match the name in the upstream directive
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_redirect off;
+  }
+}
